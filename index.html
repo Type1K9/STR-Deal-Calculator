@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STR Deal Analyzer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>STR Deal Analyzer</h1>
+        <h2>Short-Term Rental Investment Calculator</h2>
+        <p>Estimate cash flow, returns, and deal quality before you buy.</p>
+    </header>
+
+    <main>
+        <section>
+            <h3>Property & Loan</h3>
+
+            <label>Property Name</label>
+            <input type="text" id="propertyName" class="responsive-input" placeholder="Savannah Condo">
+
+            <label>Purchase Price ($)</label>
+            <input type="number" id="purchasePrice" class="responsive-input" placeholder="350000">
+
+            <label>Down Payment (%)</label>
+            <input type="number" id="downPaymentPercent" class="responsive-input" placeholder="20">
+
+            <label>Interest Rate (%)</label>
+            <input type="number" id="interestRate" class="responsive-input" placeholder="7.25">
+
+            <label>Loan Term (Years)</label>
+            <input type="number" id="loanYears" class="responsive-input" placeholder="30">
+        </section>
+
+        <section>
+            <h3>Revenue Assumptions</h3>
+
+            <label>Average Nightly Rate ($)</label>
+            <input type="number" id="nightlyRate" class="responsive-input" placeholder="175">
+
+            <label>Occupancy (%)</label>
+            <input type="number" id="occupancy" class="responsive-input" placeholder="55">
+
+            <label>Monthly Cleaning Profit ($)</label>
+            <input type="number" id="cleaningProfit" class="responsive-input" placeholder="0">
+
+            <label>Other Monthly Income ($)</label>
+            <input type="number" id="otherIncome" class="responsive-input" placeholder="0">
+        </section>
+
+        <section>
+            <h3>Monthly Expenses</h3>
+
+            <label>Property Taxes ($)</label>
+            <input type="number" id="taxes" class="responsive-input" placeholder="300">
+
+            <label>Insurance ($)</label>
+            <input type="number" id="insurance" class="responsive-input" placeholder="200">
+
+            <label>Utilities ($)</label>
+            <input type="number" id="utilities" class="responsive-input" placeholder="350">
+
+            <label>HOA ($)</label>
+            <input type="number" id="hoa" class="responsive-input" placeholder="0">
+
+            <label>Repairs / CapEx ($)</label>
+            <input type="number" id="repairs" class="responsive-input" placeholder="250">
+
+            <label>Management Fee (%)</label>
+            <input type="number" id="managementPercent" class="responsive-input" placeholder="20">
+
+            <label>Other Expenses ($)</label>
+            <input type="number" id="otherExpenses" class="responsive-input" placeholder="0">
+
+            <button onclick="calculateDeal()">Analyze Deal</button>
+        </section>
+
+        <section id="results-section">
+            <h3>Deal Results</h3>
+
+            <div class="result-grid">
+                <div class="result-card">
+                    <span>Monthly Revenue</span>
+                    <strong id="monthlyRevenue">$0</strong>
+                </div>
+
+                <div class="result-card">
+                    <span>Monthly Expenses</span>
+                    <strong id="monthlyExpenses">$0</strong>
+                </div>
+
+                <div class="result-card">
+                    <span>Monthly Cash Flow</span>
+                    <strong id="monthlyCashFlow">$0</strong>
+                </div>
+
+                <div class="result-card">
+                    <span>Cash-on-Cash Return</span>
+                    <strong id="cashOnCash">0%</strong>
+                </div>
+
+                <div class="result-card">
+                    <span>Mortgage Payment</span>
+                    <strong id="mortgagePayment">$0</strong>
+                </div>
+
+                <div class="result-card">
+                    <span>Break-Even Occupancy</span>
+                    <strong id="breakEvenOccupancy">0%</strong>
+                </div>
+            </div>
+
+            <div id="dealGrade" class="deal-grade">Enter deal data to begin.</div>
+
+            <canvas id="dealChart"></canvas>
+
+            <button onclick="saveDeal()">Save Deal</button>
+            <button id="exportBtn">Export Deal Report</button>
+            <button onclick="clearAll()">Clear Saved Deals</button>
+        </section>
+
+        <section>
+            <h3>Saved Deals</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Cash Flow</th>
+                        <th>CoC</th>
+                        <th>Grade</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="dealBody"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
