@@ -1,4 +1,4 @@
-const chartCtx = document.getElementById('dealChart').getContext('2d');
+let chartCtx;
 
 let chart;
 let currentDeal = null;
@@ -337,6 +337,10 @@ function exportDealPDF() {
     });
 }
 
-document.getElementById('exportBtn').addEventListener('click', exportDealPDF);
+window.addEventListener('DOMContentLoaded', () => {
+    chartCtx = document.getElementById('dealChart').getContext('2d');
 
-renderSavedDeals();
+    document.getElementById('exportBtn').addEventListener('click', exportDealPDF);
+
+    renderSavedDeals();
+});
